@@ -60,15 +60,34 @@ pages:
 ![](Scrin/Scrin1.png "")
 В пайплайне создаётся страничка index.html с текстом one
 ![](Scrin/Scrin2.png "")
-3. Добавляем тест, он не пройдет так как ссылается на не существующий артефокт:
+3. Добавляем  папку в артефакты и исключаем из неё один файл, тест 2 не пройдет так как ссылается на удаленный файл:
 ```yaml
 ...
-test2:
+build1:
+    stage: build
+    script:
+        - echo "Do your build here"
+        - mkdir -p build
+        - echo one >> build/artifact.txt
+        - echo two >> build/artifact2.txt
+    artifacts:
+        paths:
+            - build
+        exclude:
+            - build/artifact2.txt
+        expire_in: 1 week
+test1:
     stage: test
     script:
         - echo "Do a test here"
         - echo "For example run a test suite"
-        - grep two artifact.txt
+        - grep one build/artifact.txt
+test2:
+    stage: test
+    script:
+        - echo "Do another parallel test here"
+        - echo "For example run a lint test"
+        - grep two build/artifact.txt
 ...
 ```
 ![](Scrin/Scrin3.png "")
