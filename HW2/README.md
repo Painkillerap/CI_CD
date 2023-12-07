@@ -11,5 +11,4 @@
 ![](Scrin/Scrin2.png)
 
 **Ссылка на gitlab_ci.yaml**
-
-https://gitlab.com/pain3/demotest/-/blob/main/.gitlab-ci.yml
+https://gitlab.com/pain3/demotest/-/blob/main/Les_2/.gitlab-ci.yml
